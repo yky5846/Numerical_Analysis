@@ -1,0 +1,49 @@
+// Question
+/*
+* ch3 연습문제: #12, 18.(a)번과 아래 추가 문제, 19
+* 18번 추가 문제 
+ - x가 0이상 1이하, y와 z는 각각 2, 5일때, f(x, y, z)= xy+ 5z 함수.
+ */
+ 
+ // #12
+ 
+tstart=0; tend=20; ni=8;
+t(1)=tstart;
+y(1)=12+6*cos(2*pi*t(1)/(tend-tstart));
+
+for i=2:ni+1;
+t(i)=t(i-1)+(tend-tstart)/ni;
+y(i)=10 + 5*cos(2*pi*t(i)/(tend-tstart));
+end
+
+tt = tstart:(tend-tstart)/ni:tend;
+yy = [12*6*cos(2*pi*tt(1)/(tend-tstart)),10*5*cos(2*pi*tt(2:end)/(tend-tstart))];
+
+// #18.(a)
+
+function fr = funcrange(f,a,b,n,varargin)
+x = linspace(a,b,n);
+y = f(x,varagin{:});
+fr = max(y)-min(y);
+fplot(f,[a,b],varagin{:})
+end
+
+// 함수 불러오는 과정 필요
+
+f = @(t) 8*exp(-0.25*t).*sin(t-2);
+funcrange(f,0,6*pi,1000)
+
+// #18.추가
+
+function fr = funcrange(f,a,b,n,varagin)
+x = linspace(a,b,n);
+y = f(x,varagin{:});
+fr = max(y)-min(y);
+fplot(f,[a,b],varagin{:})
+end
+
+// 함수 불러오는 과정 필요
+
+y = 2; z = 5;
+f=@(x) x*y + 5*z;
+funcrange(f,0,1,1000)
